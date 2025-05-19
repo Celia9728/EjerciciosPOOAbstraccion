@@ -1,35 +1,36 @@
 package Ejercicio3;
 
-public class Coleccion {
+public abstract class Coleccion {
 
-    private int[] arrayEnteros;
+    private int[] array;
     private int contadorCasillasOcupadas;
 
     private final int TAM = 10;
 
     // CONSTRUCTORES
     public Coleccion() {
-        this.arrayEnteros = new int[TAM];
+        this.array = new int[TAM];
         contadorCasillasOcupadas = 0;
     }
 
     public Coleccion(int tamanio) {
-        this.arrayEnteros = new int[validarTamanio(tamanio)];
+        this.array = new int[validarTamanio(tamanio)];
         contadorCasillasOcupadas = 0;
     }
 
     // METODOS
+    public int[] getArray() {
+        return this.array;
+    }
+    
     public int getElementos() {
-
-        for (int i = 0; i < arrayEnteros.length; i++) {
-        }
         return this.contadorCasillasOcupadas;
     }
 
     public int getElemento(int pos) {
-        int posicion = (pos < 0 || pos > arrayEnteros.length - 1) ? -1 : pos;
+        int posicionPos = (pos < 0 || pos > array.length - 1) ? -1 : pos;
 
-        return this.arrayEnteros[posicion];
+        return this.array[posicionPos];
     }
 
     public boolean sinElementos() {
@@ -38,21 +39,21 @@ public class Coleccion {
 
     public void aniadir(int elemento) {
         if (validarNumero(elemento)) {
-            if (contadorCasillasOcupadas == arrayEnteros.length) {
+            if (contadorCasillasOcupadas == array.length) {
                 System.out.println("DOBLAR EL ARRAY");
-                int[] array2 = new int[arrayEnteros.length * 2];
+                int[] array2 = new int[array.length * 2];
 
                 for (int i = 0; i < array2.length; i++) {
-                    array2[i] = arrayEnteros[i];
+                    array2[i] = array[i];
                 }
 
-                this.arrayEnteros[contadorCasillasOcupadas] = elemento;
+                this.array[contadorCasillasOcupadas] = elemento;
                 contadorCasillasOcupadas++;
                 System.out.println("Añadido al array");
 
-                arrayEnteros = array2;
+                array = array2;
             } else {
-                this.arrayEnteros[contadorCasillasOcupadas] = elemento;
+                this.array[contadorCasillasOcupadas] = elemento;
                 contadorCasillasOcupadas++;
                 System.out.println("Añadido al array");
             }
@@ -65,9 +66,9 @@ public class Coleccion {
     public void eliminar(int elemento) {
         boolean encontrado = false;
         int posicion = 0;
-        for (int i = 0; i < arrayEnteros.length; i++) {
+        for (int i = 0; i < array.length; i++) {
             if (!encontrado) {
-                if (arrayEnteros[i] == elemento) {
+                if (array[i] == elemento) {
                     posicion = i;
                     encontrado = true;
                     System.out.println("encontrado");
@@ -75,13 +76,41 @@ public class Coleccion {
             }
         }
 
-//        if (encontrado) {
-//            this.contadorCasillasOcupadas = -1;,
-//            for (int i = posicion; i < this.contadorCasillasOcupadas; i++) {
-//                int auxiliar = arrayEnteros[i + 1];
-//                arrayEnteros[i] = auxiliar;
-//            }
-//        }
+        if (encontrado) {
+            this.contadorCasillasOcupadas--;
+
+            for (int i = posicion; i < this.contadorCasillasOcupadas; i++) {
+                array[i] = array[i + 1];
+            }
+        } else {
+            System.out.println("No se ha encontrado");
+        }
+    }
+
+    public boolean contiene(int elemento) {
+        boolean contiene = false;
+        for (int i = 0; i < array.length; i++) {
+            if (!contiene) {
+                if (array[i] == elemento) {
+                    contiene = true;
+                }
+            }
+        }
+        return contiene;
+    }
+
+     @Override
+    public String toString() {
+        String mensaje = "[";
+
+        for (int i = 0; i < this.contadorCasillasOcupadas; i++) {
+            if (i == this.contadorCasillasOcupadas -1) {
+                mensaje += array[i] + "]";
+            } else {
+                mensaje += array[i] + ",";
+            }
+        }
+        return mensaje;
     }
 
     // VALIDACIONES
@@ -99,9 +128,8 @@ public class Coleccion {
     }
 
     public void mostrarArray() {
-        for (int i = 0; i < this.arrayEnteros.length; i++) {
-            System.out.println(this.arrayEnteros[i]);
+        for (int i = 0; i < this.array.length; i++) {
+            System.out.println(this.array[i]);
         }
     }
-
 }

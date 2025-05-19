@@ -1,22 +1,26 @@
-
 package Ejercicio3;
 
 public class Ejercicio3Main {
 
     public static void main(String[] args) {
-        Coleccion c = new Coleccion(5);
+                Conjunto c2 = new Conjunto(3);
         
-        c.aniadir(5);
-        c.aniadir(7);
-        c.aniadir(3);
-        c.aniadir(1);
-        c.aniadir(2);
+        c2.aniadir(1);
+        c2.aniadir(2);
+        c2.aniadir(4);
+         
+        Conjunto c1 = new Conjunto(5);
         
-//        c.mostrarArray();
+        c1.aniadir(2);
+        c1.aniadir(1);
+        c1.aniadir(4);
+        c1.aniadir(8);
+        c1.aniadir(4);
         
-        c.eliminar(7);
-        c.mostrarArray();
+        Conjunto c3 = c1.interseccion(c2);
         
+        
+        System.out.println(c3);
     }
-    
+
 }
