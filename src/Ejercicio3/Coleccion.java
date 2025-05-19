@@ -49,7 +49,7 @@ public abstract class Coleccion {
 
                 this.array[contadorCasillasOcupadas] = elemento;
                 contadorCasillasOcupadas++;
-                System.out.println("Añadido al array");
+//                System.out.println("Añadido al array");
 
                 array = array2;
             } else {

@@ -34,17 +34,25 @@ public class Conjunto extends Coleccion {
     }
 
     public Conjunto interseccion(Conjunto conjunto2) {
-        int mayor;
-        
+        Conjunto mayor;
+        Conjunto menor;
+//        if (super.getArray().length >= conjunto2.getArray().length) {
+//            mayor = super.getArray().length;
+//        } else{
+//            mayor = conjunto2.getArray().length;
+//        }
+
         if (super.getArray().length >= conjunto2.getArray().length) {
-            mayor = super.getArray().length;
+            mayor = this;
+            menor = conjunto2;
         } else{
-            mayor = conjunto2.getArray().length;
+            mayor = conjunto2;
+            menor = this;
         }
-        
+
         Conjunto interseccion = new Conjunto();
-        for (int i = 0; i < mayor; i++) {
-            if (super.contiene(conjunto2.getArray()[i])) {
+        for (int i = 0; i < menor.getArray().length; i++) {
+            if (mayor.contiene(menor.getArray()[i])) {
                 interseccion.aniadir(conjunto2.getArray()[i]);
             }
         }
